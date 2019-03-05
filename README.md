@@ -28,11 +28,11 @@ To test the example application run the following commands.
 # Dev Environment Setup
 
 ## Files
-- Dockerfile - Buid the hello-dropwizard docker image using the compliled jar file
-- docker-compose.yml - Docker swarm config file including nginx configurations.
-- nginx/conf.d/hello-world.conf - Nginx config file (All the config files added to this directory will pick by the nginx container)
-- setup_env.sh - All the startup command added to one script to startup easily.
-- Dockerfile_with_build (optional) - If you want to build the packages inside the container then you should use this Dockerfile.
+- `Dockerfile` - Buid the hello-dropwizard docker image using the compliled jar file
+- `docker-compose.yml` - Docker swarm config file including nginx configurations.
+- `nginx/conf.d/hello-world.conf` - Nginx config file (All the config files added to this directory will pick by the nginx container)
+- `setup_env.sh` - All the startup command added to one script to startup easily.
+- `Dockerfile_with_build` (optional) - If you want to build the packages inside the container then you should use this Dockerfile.
 
 ## Setup
 Here I have used the docker swarm to startup the local environment, `docker-compose.yml` file contain all the configuratuon about the swarm containers. By default I've added to start 05 replicas of hello-dropwizard java app containers with 01 nginx container to proxy the incoming traffic to backend java containers.
