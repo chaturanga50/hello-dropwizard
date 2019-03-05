@@ -12,7 +12,7 @@ To test the example application run the following commands.
 
 * To run the server run.
 
-        java -jar target/hello-dropwizard-1.0-SNAPSHOT.jar server example.yml
+        java -jar target/hello-dropwizard-1.0-SNAPSHOT.jar server example.yaml
 
 * To hit the Hello World example (hit refresh a few times).
 
@@ -25,22 +25,16 @@ To test the example application run the following commands.
   * deadlocks: OK
   * template: OK
 
-# Dev Environment Exercise (Please ignore)
+# Dev Environment Setup
 
-## Background
-The company you work for is building a dropwizard Restful services.
-They have completed their first sprint of work and are ready to begin preparing to ship it. Being a DevOps genius, you know that it will be difficult to reproduce bugs and increase  ownership if there's not an easy way to  reliably run these services locally as you would in production. At the same time, you want to get some automation that can be reused in production.
+## Files
+- Dockerfile - Buid the hello-dropwizard docker image using the compliled jar file
+- docker-compose.yml - Docker swarm config file including nginx configurations.
+- nginx/conf.d/hello-world.conf - Nginx config file (All the config files added to this directory will pick by the nginx container)
+- setup_env.sh - All the startup command added to one script to startup easily.
+- Dockerfile_with_build (optional) - If you want to build the packages inside the container then you should use this Dockerfile.
 
-## Your Task
-Your next task is to take the recently built hello-dropwizard service:
+## Setup
+Here I have used the docker swarm to startup the local environment, `docker-compose.yml` file contain all the configuratuon about the swarm containers. By default I've added to start 05 replicas of hello-dropwizard java app containers with 01 nginx container to proxy the incoming traffic to backend java containers.
 
-- Read the documentation for the Hello Dropwizard service and test them to make sure they work as expected.
-- Once you understand their usage, use preferred tools and technology to create automation that stands up local dev environment of the stack.
-- You discuss with the engineers that in order for a service oriented architecture to work best, there will need to be some http routing in front of the services so that requests go to the right places. When the stack is deployed, accessing `/hello` should route to the *hello-dropwizard/hello-world*. Use technology and tools you know to implement this behavior.
-
-*Bonus (Optional)*
-- If you haven't already, create an efficient docker image based on best practices for at least one service. Be prepared to explain why it's efficient.
-
-## Results
-
-Make the dev environment automation available via a public github repo with any instructions on how to run your dev environment in an accompanying `README.md` file. Send it in and be prepared to discuss it.
+All the traffic comming to the `/hello` will be routed to the applications `/hello-world/` page.
